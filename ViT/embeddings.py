@@ -44,7 +44,7 @@ class ClassTokenEmbedding(nn.Module):
 
 class PositionalEmbedding(nn.Module):
 
-    def __init__(self, N, embed_dim):
+    def __init__(self, embed_dim, max_len=5000):
         """
         Construct the PositionalEncoding layer.
         Args:
@@ -54,11 +54,11 @@ class PositionalEmbedding(nn.Module):
         """
         super(PositionalEncoding, self).__init__()
         
-        self.pos_emb = nn.Parameter(torch.randn(N, embed_dim))      
+        self.pos_emb = nn.Parameter(torch.randn(max_len, embed_dim))      
 
     def forward(self, x):
         n_batch, N, embed_dim = x.shape
-        pe_output = x + self.pos_emb
+        pe_output = x + self.pos_emb[:N, :]
         return pe_output
 
 
