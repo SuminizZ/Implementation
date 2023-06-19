@@ -44,7 +44,7 @@ class ClassTokenEmbedding(nn.Module):
 
 class PositionalEncoding(nn.Module):
 
-    def __init__(self, embed_dim, device, max_len=500):
+    def __init__(self, N, embed_dim):
         """
         Construct the PositionalEncoding layer.
         Args:
@@ -54,26 +54,11 @@ class PositionalEncoding(nn.Module):
         """
         super(PositionalEncoding, self).__init__()
         
-        # self.dropout = nn.Dropout(p=dropout)
-        assert embed_dim % 2 == 0
-        pe = torch.zeros(1, max_len, embed_dim)
-        pe.requries_grad = False
-
-        p_seq = torch.arange(0, max_len).unsqueeze(1)
-        p_idx = 10000**(torch.arange(0, embed_dim//2)*(-2/embed_dim))
-        outer = p_seq*p_idx
-
-        even_idx = torch.arange(0, embed_dim//2)*2
-        odd_idx = torch.arange(0, embed_dim//2)*2 + 1
-
-        pe[:, :, even_idx] = torch.sin(outer)
-        pe[:, :, odd_idx] = torch.cos(outer)
-
-        self.register_buffer('pe', pe)
+        self.pos_emb = nn.Parameter(torch.randn(N, embed_dim))      
 
     def forward(self, x):
         n_batch, N, embed_dim = x.shape
-        pe_output = x + self.pe[0, :N, :]
+        pe_output = x + self.pos_emb
         return pe_output
 
 
