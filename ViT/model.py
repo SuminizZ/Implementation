@@ -9,7 +9,7 @@ from ViT.embeddings import *
 
 class EncoderBlock(nn.Module):
 
-    def __init__(self, embed_dim, hidden_dim, num_heads, device, drop_prob=0.1):
+    def __init__(self, embed_dim, hidden_dim, num_heads, drop_prob=0.1):
         """
         Basic Encoder block constists of 1 MSA and 1 MLP
         """
