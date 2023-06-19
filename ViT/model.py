@@ -38,7 +38,7 @@ class EncoderBlock(nn.Module):
 
 class ViT(nn.Module):
 
-    def __init__(self, n_batch, input_dim, embed_dim, vocab_size, 
+    def __init__(self, n_batch, input_dim, embed_dim,
                  num_classes, pool,
                  hidden_dim, num_heads, 
                  num_layers, device):
@@ -47,7 +47,7 @@ class ViT(nn.Module):
         # Embedding & Encoding
         self.patchify = PatchEmbedding(input_dim, embed_dim)
         self.class_token = ClassTokenEmbedding(n_batch, embed_dim)
-        self.pos_enc = PositionalEncoding(embed_dim, device)
+        self.pos_enc = PositionalEmbedding(N, embed_dim)
 
         # Stacks of encoder blocks
         self.encoder_blocks = nn.ModuleList([EncoderBlock(embed_dim, hidden_dim, num_heads) for _ in range(num_layers)])
