@@ -47,7 +47,7 @@ class ViT(nn.Module):
         # Embedding & Encoding
         self.patchify = PatchEmbedding(p, input_dim, embed_dim)
         self.class_token = ClassTokenEmbedding(n_batch, embed_dim)
-        self.pos_enc = PositionalEmbedding(N, embed_dim)
+        self.pos_enc = PositionalEmbedding(embed_dim)
 
         # Stacks of encoder blocks
         self.encoder_blocks = nn.ModuleList([EncoderBlock(embed_dim, hidden_dim, num_heads) for _ in range(num_layers)])
