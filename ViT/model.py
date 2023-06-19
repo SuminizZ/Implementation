@@ -45,7 +45,7 @@ class ViT(nn.Module):
         super(Encoder, self).__init__()
 
         # Embedding & Encoding
-        self.patchify = PatchEmbedding(input_dim, embed_dim)
+        self.patchify = PatchEmbedding(p, input_dim, embed_dim)
         self.class_token = ClassTokenEmbedding(n_batch, embed_dim)
         self.pos_enc = PositionalEmbedding(N, embed_dim)
 
