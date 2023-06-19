@@ -42,7 +42,7 @@ class ClassTokenEmbedding(nn.Module):
         return torch.cat([x, self.classtoken], dim=1)
 
 
-class PositionalEncoding(nn.Module):
+class PositionalEmbedding(nn.Module):
 
     def __init__(self, N, embed_dim):
         """
